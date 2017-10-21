@@ -14,13 +14,6 @@ type ghasedakapi struct {
 	HTTPClient *http.Client
 }
 
-// Exception 
-type Exception struct {
-	Status   int    `json:"status"`    // HTTP specific error code
-	Message  string `json:"message"`   // HTTP error message
-	Code     int    `json:"code"`      // ghasedakapi specific error code
-}
-
 // Create a new ghasedakapi struct.
 func NewClient(apiKey string) *ghasedakapi {
 	return NewHttpClient(apiKey, nil)
