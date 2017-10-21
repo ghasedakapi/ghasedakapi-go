@@ -1,2 +1,2 @@
 # ghasedakapi-go
-Ghasedakpi Go library
+Ghasedakapi Go library
