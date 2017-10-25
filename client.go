@@ -56,8 +56,12 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 	}
 	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
-		exception = new(APIError)
-		err = json.Unmarshal(resp, exception)
+		responseBody, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return resp, err
+		}
+		exception := new(APIError)
+		err = json.Unmarshal(responseBody, exception)
 		if err !=nil{
 			return resp, err
 		}

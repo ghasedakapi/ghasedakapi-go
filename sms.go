@@ -3,6 +3,7 @@ package ghasedakapi
 import (
 	"net/url"
 	"io/ioutil"
+	"encoding/json"
 )
 
 type ApiResult struct {
@@ -28,7 +29,7 @@ func (sms *SMSService) Send(message string,sender string,receptor string) (apiRe
 // Core method to send message
 func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult, err error) {
 	smsUrl := sms.client.BaseUrl + "/api/v1/sms/send/simple"
-	res, err := m.client.Execute(smsUrl,formValues)
+	res, err :=sms.client.Execute(smsUrl,formValues)
 	if err != nil {
 		return apiResult, err
 	}
@@ -38,8 +39,7 @@ func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult,
 	if err != nil {
 		return apiResult, err
 	}
-
 	apiResult = new(ApiResult)
 	err = json.Unmarshal(responseBody, apiResult)
-	return apiResult, exception, err
+	return apiResult, err
 }
