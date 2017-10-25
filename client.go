@@ -10,7 +10,7 @@ import(
 )
 
 const(
-	baseUrl="http://ghasedakapi.2parsaspace.com"
+	baseUrl="http://ghasedakapi.parsaspace.com"
 )
 type Client struct {
 	ApiKey string
@@ -32,10 +32,10 @@ func NewHttpClient(apiKey string, HTTPClient *http.Client) *Client {
 }
 
 
-func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Response,error) {
+func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Response,error,string) {
 	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(formValues.Encode()))
 	if err != nil {
-		return nil, err
+		return nil, err,"1"
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Accept", "application/json")
@@ -47,29 +47,29 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 	 resp,err:=c.Do(req)
 	if err != nil {
 		if err, ok := err.(net.Error); ok && err.Timeout() {
-			return resp, err
+			return resp, err,"2"
 		}
 		return resp,&HTTPError{
 			Code:  resp.StatusCode,
 			Message: resp.Status,
 			Err:     err,
-		}
+		},"3"
 	}
 	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
 		responseBody, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			return resp, err
+			return resp, err,"4"
 		}
 		exception := new(APIError)
 		err = json.Unmarshal(responseBody, exception)
 		if err !=nil{
-			return resp, err
+			return resp, err,"5"
 		}
 		return resp,&APIError{
 			Code:  exception.Code,
 			Message: exception.Message,
-		}
+		},"6"
 	}
-	return resp,nil
+	return resp,nil,"7"
 }
