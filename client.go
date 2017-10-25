@@ -50,19 +50,19 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 		return &HTTPError{
 			Code:  resp.StatusCode,
 			Message: resp.Status,
-			Error:     err,
+			Err:     err,
 		}
 	}
 	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
-		ApiErr = new(APIError)
-		err = json.Unmarshal(resp, ApiErr)
+		APIError = new(APIError)
+		err = json.Unmarshal(resp, APIError)
 		if err !=nil{
 			return resp, err
 		}
 		return &APIError{
-			Code:  ApiErr.Result.Code,
-			Message: ApiErr.Result.Message,
+			Code:  APIError.Result.Code,
+			Message: APIError.Result.Message,
 		}
 	}
 	return resp,nil

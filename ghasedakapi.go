@@ -1,6 +1,5 @@
 package ghasedakapi
 
-//Kavenegar ...
 type GhasedakApi struct {
 	SMS *SMSService
 }

@@ -7,12 +7,12 @@ import (
 type APIError struct {
 	Code  int
 	Message string
-	Error     error
+	Err     error
 }
 type HTTPError struct {
 	Code  int
 	Message string
-	Error     error
+	Err     error
 }
 
 func (e *APIError) Error() string {

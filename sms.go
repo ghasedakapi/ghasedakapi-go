@@ -2,8 +2,6 @@ package ghasedakapi
 
 import (
 	"net/url"
-	"strings"
-	"fmt"
 	"io/ioutil"
 )
 
