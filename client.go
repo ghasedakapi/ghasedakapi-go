@@ -10,7 +10,7 @@ import(
 )
 
 const(
-	baseUrl="http://ghasedakapi.parsaspace.com"
+	baseUrl="http://ghasedakapi.2parsaspace.com"
 )
 type Client struct {
 	ApiKey string
