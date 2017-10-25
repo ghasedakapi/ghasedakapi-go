@@ -32,10 +32,10 @@ func NewHttpClient(apiKey string, HTTPClient *http.Client) *Client {
 }
 
 
-func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Response,error,string) {
+func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Response,error) {
 	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(formValues.Encode()))
 	if err != nil {
-		return nil, err,"1"
+		return nil, err
 	}
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Accept", "application/json")
@@ -47,29 +47,29 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 	 resp,err:=c.Do(req)
 	if err != nil {
 		if err, ok := err.(net.Error); ok && err.Timeout() {
-			return resp, err,"2"
+			return resp, err
 		}
 		return resp,&HTTPError{
 			Code:  resp.StatusCode,
 			Message: resp.Status,
 			Err:     err,
-		},"3"
+		}
 	}
 	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
 		responseBody, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			return resp, err,"4"
+			return resp, err
 		}
 		exception := new(ApiResult)
 		err = json.Unmarshal(responseBody, exception)
 		if err !=nil{
-			return resp, err,"5"
+			return resp, err
 		}
 		return resp,&APIError{
 			Code:  exception.Result.Code,
 			Message: exception.Result.Message,
-		},string(responseBody)
+		}
 	}
-	return resp,nil,"7"
+	return resp,nil
 }
