@@ -27,19 +27,19 @@ func (sms *SMSService) Send(message string,sender string,receptor string) (apiRe
 }
 
 // Core method to send message
-func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult, err error) {
+func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult, err error,ww string) {
 	smsUrl := sms.client.BaseUrl + "/api/v1/sms/send/simple"
-	res, err :=sms.client.Execute(smsUrl,formValues)
+	res, err,w :=sms.client.Execute(smsUrl,formValues)
 	if err != nil {
-		return apiResult, err
+		return apiResult, err,w
 	}
 	defer res.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return apiResult, err
+		return apiResult, err,"11"
 	}
 	apiResult = new(ApiResult)
 	err = json.Unmarshal(responseBody, apiResult)
-	return apiResult, err
+	return apiResult, err,"12"
 }
