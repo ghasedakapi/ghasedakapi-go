@@ -56,14 +56,14 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 	}
 	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
-		APIError = new(APIError)
-		err = json.Unmarshal(resp, APIError)
+		exception = new(APIError)
+		err = json.Unmarshal(resp, exception)
 		if err !=nil{
 			return resp, err
 		}
 		return resp,&APIError{
-			Code:  APIError.Result.Code,
-			Message: APIError.Result.Message,
+			Code:  exception.Result.Code,
+			Message: exception.Result.Message,
 		}
 	}
 	return resp,nil
