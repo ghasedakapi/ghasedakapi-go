@@ -4,6 +4,7 @@ import(
 	"net/http"
 	"net/url"
 	"strings"
+	"net"
 	"encoding/json"
 )
 
@@ -42,7 +43,7 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 	if c == nil {
 		c = http.DefaultClient
 	}
-	 resp,err:=c.HTTPClient.Do(req)
+	 resp,err:=c.Do(req)
 	if err != nil {
 		if err, ok := err.(net.Error); ok && err.Timeout() {
 			return resp, err
