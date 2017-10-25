@@ -61,14 +61,14 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 		if err != nil {
 			return resp, err,"4"
 		}
-		exception := new(APIError)
+		exception := new(ApiResult)
 		err = json.Unmarshal(responseBody, exception)
 		if err !=nil{
 			return resp, err,"5"
 		}
 		return resp,&APIError{
-			Code:  exception.Code,
-			Message: exception.Message,
+			Code:  exception.Result.Code,
+			Message: exception.Result.Message,
 		},string(responseBody)
 	}
 	return resp,nil,"7"
