@@ -48,7 +48,7 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 		if err, ok := err.(net.Error); ok && err.Timeout() {
 			return resp, err
 		}
-		return &HTTPError{
+		return resp,&HTTPError{
 			Code:  resp.StatusCode,
 			Message: resp.Status,
 			Err:     err,
@@ -61,7 +61,7 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 		if err !=nil{
 			return resp, err
 		}
-		return &APIError{
+		return resp,&APIError{
 			Code:  APIError.Result.Code,
 			Message: APIError.Result.Message,
 		}
