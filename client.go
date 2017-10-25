@@ -4,6 +4,7 @@ import(
 	"net/http"
 	"net/url"
 	"strings"
+		"io/ioutil"
 	"net"
 	"encoding/json"
 )
@@ -66,8 +67,8 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 			return resp, err
 		}
 		return resp,&APIError{
-			Code:  exception.Result.Code,
-			Message: exception.Result.Message,
+			Code:  responseBody.Result.Code,
+			Message: responseBody.Result.Message,
 		}
 	}
 	return resp,nil
