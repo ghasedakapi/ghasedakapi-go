@@ -12,7 +12,7 @@ type ApiResult struct {
 }
 
 type ResultItems struct{
-	Code 		string		`json:"code"`
+	Code 		int		`json:"code"`
 	Message		string		`json:"message"`
 }
 
