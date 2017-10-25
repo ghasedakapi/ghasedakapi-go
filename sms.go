@@ -18,7 +18,7 @@ type ResultItems struct{
 
 
 //Send ...
-func (sms *SMSService) Send(message string,sender string,receptor string) (apiResult *ApiResult, err error) {
+func (sms *SMSService) Send(message string,sender string,receptor string) (apiResult *ApiResult, err error,ww string) {
 	v := url.Values{}
 	v.Set("sender", sender)
 	v.Set("receptor", receptor)
