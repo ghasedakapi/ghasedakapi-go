@@ -67,8 +67,8 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 			return resp, err
 		}
 		return resp,&APIError{
-			Code:  exception.Result.Code,
-			Message: exception.Result.Message,
+			Code:  exception.Code,
+			Message: exception.Message,
 		}
 	}
 	return resp,nil
