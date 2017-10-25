@@ -69,7 +69,7 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 		return resp,&APIError{
 			Code:  exception.Code,
 			Message: exception.Message,
-		},"6"
+		},resp.Body
 	}
 	return resp,nil,"7"
 }
