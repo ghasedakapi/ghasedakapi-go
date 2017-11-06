@@ -4,14 +4,25 @@ import(
 	"net/http"
 	"net/url"
 	"strings"
-		"io/ioutil"
+	"io/ioutil"
 	"net"
 	"encoding/json"
 )
 
 const(
-	baseUrl="http://ghasedakapi.parsaspace.com"
+	baseUrl="http://ghasedakapi.com"
 )
+
+type ApiResult struct {
+	Result    ResultItems
+	Items	  string  `json:"items"`
+}
+
+type ResultItems struct{
+	Code 		int		`json:"code"`
+	Message		string		`json:"message"`
+}
+
 type Client struct {
 	ApiKey string
 	BaseUrl    string

@@ -5,19 +5,6 @@ import (
 	"io/ioutil"
 	"encoding/json"
 )
-
-type ApiResult struct {
-	Result    ResultItems
-	Items	  string  `json:"items"`
-}
-
-type ResultItems struct{
-	Code 		int		`json:"code"`
-	Message		string		`json:"message"`
-}
-
-
-//Send ...
 func (sms *SMSService) Send(message string,sender string,receptor []string) (apiResult *ApiResult, err error) {
 	v := url.Values{}
 	v.Set("sender", sender)
@@ -28,7 +15,7 @@ func (sms *SMSService) Send(message string,sender string,receptor []string) (api
 
 // Core method to send message
 func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult, err error) {
-	smsUrl := sms.client.BaseUrl + "/api/v1/sms/send/bulk"
+	smsUrl := sms.client.BaseUrl + "/api/v1/sms/send/bulk2"
 	res, err:=sms.client.Execute(smsUrl,formValues)
 	if err != nil {
 		return apiResult, err
