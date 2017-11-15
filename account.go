@@ -13,10 +13,10 @@ func (account *AccountService) getinfo() (apiResult *ApiResult, err error) {
 }
 
 
-// Core method to send message
-func (sms *SMSService) makeRequest(formValues url.Values) (apiResult *ApiResult, err error) {
-	smsUrl := sms.client.BaseUrl + "/api/v1/account/info"
-	res, err:=sms.client.Execute(smsUrl,formValues)
+
+func (account *AccountService) makeRequest(formValues url.Values) (apiResult *ApiResult, err error) {
+	smsUrl := account.client.BaseUrl + "/api/v1/account/info"
+	res, err:=account.client.Execute(smsUrl,formValues)
 	if err != nil {
 		return apiResult, err
 	}
