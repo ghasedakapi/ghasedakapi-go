@@ -3,9 +3,13 @@ package ghasedakapi
 type GhasedakApi struct {
 	SMS *SMSService
 	Account *AccountService
+	Voice *VoiceService
 }
 
 type SMSService struct {
+	client *Client
+}
+type VoiceService struct {
 	client *Client
 }
 type AccountService struct {
@@ -29,8 +33,11 @@ func NewWithClient(client *Client) *GhasedakApi {
 func NewSMSService(client *Client) *SMSService {
 	return &SMSService{client: client}
 }
-func NewAccountService(client *Client) *SMSService {
+func NewAccountService(client *Client) *AccountService {
 	return &AccountService{client: client}
 }
 
+func NewVoiceService(client *Client) *VoiceService {
+	return &VoiceService{client: client}
+}
 
