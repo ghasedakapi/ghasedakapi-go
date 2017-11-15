@@ -67,7 +67,6 @@ func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Respo
 			Err:     err,
 		}
 	}
-	defer resp.Body.Close()
 	if  resp.StatusCode!=200 {
 		responseBody, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
