@@ -44,6 +44,7 @@ func NewHttpClient(apiKey string, HTTPClient *http.Client) *Client {
 
 
 func (client *Client) Execute(apiUrl string, formValues  url.Values)(*http.Response,error) {
+	formValues.Set("apikey", client.ApiKey)
 	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(formValues.Encode()))
 	if err != nil {
 		return nil, err
