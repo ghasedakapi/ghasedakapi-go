@@ -4,10 +4,11 @@ import (
 	"net/url"
 	"io/ioutil"
 	"encoding/json"
+	"fmt"
 )
 func (sms *SMSService) Send(message string,sender string,receptor []string) (apiResult *ApiResult, err error) {
 	v := url.Values{}
-	v.Set("sender", sender)
+	v.Set("linenumber", sender)
 	v.Set("receptor", arrayToString(receptor))
 	v.Set("message", message)
 	return sms.sendMessage(v)
@@ -21,6 +22,7 @@ func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult,
 		return apiResult, err
 	}
 	defer res.Body.Close()
+	fmt.Println(res.Body)
 	responseBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return apiResult, err
