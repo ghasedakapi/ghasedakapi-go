@@ -15,7 +15,7 @@ const(
 
 type ApiResult struct {
 	Result    ResultItems
-	Items	  string  `json:"items"`
+	Items	  []int64  `json:"items"`
 }
 
 type ResultItems struct{

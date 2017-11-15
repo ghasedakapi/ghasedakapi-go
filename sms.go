@@ -22,7 +22,6 @@ func (sms *SMSService) sendMessage(formValues url.Values) (apiResult *ApiResult,
 		return apiResult, err
 	}
 	defer res.Body.Close()
-	fmt.Println(res.Body)
 	responseBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return apiResult, err
