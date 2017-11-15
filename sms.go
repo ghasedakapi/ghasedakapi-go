@@ -4,7 +4,6 @@ import (
 	"net/url"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 )
 func (sms *SMSService) Send(message string,sender string,receptor []string) (apiResult *ApiResult, err error) {
 	v := url.Values{}
