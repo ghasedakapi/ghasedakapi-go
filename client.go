@@ -10,7 +10,7 @@ import(
 )
 
 const(
-	baseUrl="http://ghasedakapi.com"
+	baseUrl="http://178.216.249.18:8011/"
 )
 
 type ApiResult struct {

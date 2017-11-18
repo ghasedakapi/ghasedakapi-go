@@ -16,7 +16,7 @@ type AccountInfoItem struct{
 }
 
 //Get Account Information
-func (account *AccountService) Send() (accountres *AccountResult, err error) {
+func (account *AccountService) GetInfo() (accountres *AccountResult, err error) {
 	v := url.Values{}
 	return account.makeRequest(v)
 }
