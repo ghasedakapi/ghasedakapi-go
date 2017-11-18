@@ -25,8 +25,8 @@ func New(apikey string) *GhasedakApi {
 
 func NewWithClient(client *Client) *GhasedakApi {
 	obj := &GhasedakApi{}
-	obj.SMS = NewSMSService(client)
 	obj.Account =NewAccountService(client)
+	obj.SMS = NewSMSService(client)
 	obj.Voice = NewVoiceService(client)
 	return obj
 }
