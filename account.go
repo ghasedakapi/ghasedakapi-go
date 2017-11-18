@@ -23,7 +23,7 @@ func (account *AccountService) getinfo() (apiResult *ApiResult, err error) {
 
 
 
-func (account *AccountService) makeRequest(formValues url.Values) (apiResult *ApiResult, err error) {
+func (account *AccountService) makeRequest(formValues url.Values) (apiResult *AccountResult, err error) {
 	smsUrl := account.client.BaseUrl + "/api/v1/account/info"
 	res, err:=account.client.Execute(smsUrl,formValues)
 	if err != nil {
