@@ -8,7 +8,7 @@ import (
 
 type AccountResult struct {
 	Result    ResultItems
-	Items	  []int64  `json:"items"`
+	Items	  AccountInfoItem
 }
 type AccountInfoItem struct{
 	Balance		int
@@ -16,25 +16,25 @@ type AccountInfoItem struct{
 }
 
 //Get Account Information
-func (account *AccountService) getinfo() (apiResult *AccountResult, err error) {
+func (account *AccountService) getinfo() (accountres *AccountResult, err error) {
 	v := url.Values{}
 	return account.makeRequest(v)
 }
 
 
 
-func (account *AccountService) makeRequest(formValues url.Values) (apiResult *AccountResult, err error) {
+func (account *AccountService) makeRequest(formValues url.Values) (accountres *AccountResult, err error) {
 	smsUrl := account.client.BaseUrl + "/api/v1/account/info"
 	res, err:=account.client.Execute(smsUrl,formValues)
 	if err != nil {
-		return apiResult, err
+		return accountres, err
 	}
 	defer res.Body.Close()
 	responseBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return apiResult, err
+		return accountres, err
 	}
-	apiResult = new(AccountResult)
-	err = json.Unmarshal(responseBody, apiResult)
-	return apiResult, err
+	accountres = new(AccountResult)
+	err = json.Unmarshal(responseBody, accountres)
+	return accountres, err
 }
