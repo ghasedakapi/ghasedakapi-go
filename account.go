@@ -6,6 +6,15 @@ import (
 	"encoding/json"
 )
 
+type AccountResult struct {
+	Result    ResultItems
+	Items	  []int64  `json:"items"`
+}
+type AccountInfoItem struct{
+	Balance		int
+	Expire		int
+}
+
 //Get Account Information
 func (account *AccountService) getinfo() (apiResult *ApiResult, err error) {
 	v := url.Values{}
@@ -25,7 +34,7 @@ func (account *AccountService) makeRequest(formValues url.Values) (apiResult *Ap
 	if err != nil {
 		return apiResult, err
 	}
-	apiResult = new(ApiResult)
+	apiResult = new(AccountResult)
 	err = json.Unmarshal(responseBody, apiResult)
 	return apiResult, err
 }
