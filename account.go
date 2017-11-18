@@ -12,7 +12,7 @@ type AccountResult struct {
 }
 type AccountInfoItem struct{
 	Balance		int  `json:"balance"`
-	Expire		int  `json:"expire"`
+	Expire		string  `json:"expire"`
 }
 
 //Get Account Information
@@ -20,7 +20,6 @@ func (account *AccountService) GetInfo() (accountres *AccountResult, err error) 
 	v := url.Values{}
 	return account.makeRequest(v)
 }
-
 
 
 func (account *AccountService) makeRequest(formValues url.Values) (accountres *AccountResult, err error) {
