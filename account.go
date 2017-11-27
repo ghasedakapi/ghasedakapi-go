@@ -4,7 +4,6 @@ import (
 	"net/url"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 )
 
 type AccountResult struct {
@@ -35,7 +34,6 @@ func (account *AccountService) makeRequest(formValues url.Values) (accountres *A
 		return accountres, err
 	}
 	accountres = new(AccountResult)
-	fmt.Println(res.Body)
 	err = json.Unmarshal(responseBody, accountres)
 	return accountres, err
 }
