@@ -6,6 +6,7 @@ type GhasedakApi struct {
 	Voice *VoiceService
 	Status *StatusService
 	Receive	*ReceiveService
+	Template *TemplateService
 }
 
 type SMSService struct {
@@ -25,6 +26,10 @@ type AccountService struct {
 type ReceiveService struct {
 	client *Client
 }
+type TemplateService struct {
+	client *Client
+}
+
 
 func New(apikey string) *GhasedakApi {
 	client := NewClient(apikey)
@@ -38,9 +43,13 @@ func NewWithClient(client *Client) *GhasedakApi {
 	obj.Voice = NewVoiceService(client)
 	obj.Receive=NewReceiveService(client)
 	obj.Status=NewStatusService(client)
+	obj.Template=NewTemplateService(client)
 	return obj
 }
 
+func NewTemplateService(client *Client) *TemplateService {
+	return &TemplateService{client: client}
+}
 func NewReceiveService(client *Client) *ReceiveService {
 	return &ReceiveService{client: client}
 }
